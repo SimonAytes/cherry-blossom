@@ -103,11 +103,19 @@ def get_representative_locations(file_path, output_name):
     return data_no_duplicates[['cluster', 'location', 'lat', 'long']], representative_locations, location_data
 
 
-def clean_weather_df(file_path):
+def clean_weather_df(file_path, columns=None, name=None):
     df = pd.read_csv(file_path)
 
-    # Get name for the dataframe
-    df_name_str = df.iloc[0]['name']
+    # Optional: select only specific columns
+    if columns:
+        df = df[columns]
+
+    # Optional: specify name for data point
+    if name:
+        df_name_str = name
+    else:
+        # Get name for the dataframe
+        df_name_str = df.iloc[0]['name']
 
     # Calculate the total seconds of sunlight in the day
     df['sunrise'] = pd.to_datetime(df['sunrise'], format='%Y-%m-%dT%H:%M:%S')

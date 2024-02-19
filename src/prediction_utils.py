@@ -12,7 +12,7 @@ from sklearn.ensemble import GradientBoostingRegressor
 scaler = StandardScaler()
 
 # Path to the model to load
-model_dir_path = "./models/GBR-20240218-01/"
+model_dir_path = "./models/GBR-20240218-02/"
 
 # Load the trained model
 model = joblib.load(f'{model_dir_path}model.pkl')
@@ -25,28 +25,28 @@ feature_list = joblib.load(f'{model_dir_path}feature_list.pkl')
 
 # Best parameters chosen via Grid-Search HPO
 best_params = {
-    'alpha': 0.9,
-    'ccp_alpha': 0.0,
-    'criterion': 'friedman_mse',
-    'init': None,
-    'learning_rate': 0.2,
-    'loss': 'squared_error',
-    'max_depth': 5,
-    'max_features': 'sqrt',
-    'max_leaf_nodes': None,
-    'min_impurity_decrease': 0.0,
-    'min_samples_leaf': 2,
-    'min_samples_split': 2,
-    'min_weight_fraction_leaf': 0.0,
-    'n_estimators': 50,
-    'n_iter_no_change': None,
-    'random_state': 42,
-    'subsample': 0.8,
-    'tol': 0.0001,
-    'validation_fraction': 0.1,
-    'verbose': 0,
-    'warm_start': False
-}
+                'alpha': 0.9,
+                'ccp_alpha': 0.0,
+                'criterion': 'friedman_mse',
+                'init': None,
+                'learning_rate': 0.1,
+                'loss': 'squared_error',
+                'max_depth': 4,
+                'max_features': 'sqrt',
+                'max_leaf_nodes': None,
+                'min_impurity_decrease': 0.0,
+                'min_samples_leaf': 1,
+                'min_samples_split': 10,
+                'min_weight_fraction_leaf': 0.0,
+                'n_estimators': 200,
+                'n_iter_no_change': None,
+                'random_state': None,
+                'subsample': 0.8,
+                'tol': 0.0001,
+                'validation_fraction': 0.1,
+                'verbose': 0,
+                'warm_start': False
+              }
 
 # Chosen via a 90% threshold analysis of feature importance
 selected_features = ['day_length_07', 'day_length_10', 'day_length_05', 'day_length_11',
