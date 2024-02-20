@@ -127,14 +127,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 <div id="79f2db86-b83f-4a08-917e-e42cb54b2aa4" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> src <span class="im">import</span> cherry_blossom_utils <span class="im">as</span> util</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> src <span class="im">import</span> prediction_utils <span class="im">as</span> pred_util</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime <span class="im">as</span> dt</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
@@ -146,8 +143,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="2"><span class="header-section-number">2</span> Data Preprocessing</h1>
 <p>The data provided by the event organizers will form the foundation of our training dataset. Some files – like Switzerland and Japan – are already in our ideal format. However, the USA-NPN dataset needs some additional formatting before it is usable.</p>
 <div id="2d680db0-67dd-43b9-b1c1-6e9df46f342e" class="cell" data-execution_count="2">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load USA-NPN dataset</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>usa_npn <span class="op">=</span> pd.read_csv(<span class="st">"./data/raw/USA-NPN_status_intensity_observations_data.csv"</span>, na_values<span class="op">=</span>[<span class="op">-</span><span class="fl">9999.00</span>])</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -176,16 +171,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Output the dataframe to CSV</span></span>
 <span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>usa_bloom_df.to_csv(<span class="st">"./data/raw/usa_formatted.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>In addition to the re-formatting of this file, we also need to isolate the data for NYC which is one of the locations included in the contest submission. Therefore, two dataframes will be created; one for NYC and another for all other locations in the US.</p>
 <p>After processing these files, we are left with the following two dataframes:</p>
 <p><strong>USA Dataframe</strong></p>
 <div id="939c0515-9e15-416a-a0b4-032b21d44ee4" class="cell" data-execution_count="3">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>usa_bloom_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 <div><div id="f990e928-c3dd-4e29-9574-3dbeb82ed3ee" style="display:none; background-color:#9D6CFF; color:white; width:200px; height:30px; padding-left:5px; border-radius:4px; flex-direction:row; justify-content:space-around; align-items:center;" onmouseover="this.style.backgroundColor='#BA9BF8'" onmouseout="this.style.backgroundColor='#9D6CFF'" onclick="window.commands?.execute('create-mitosheet-from-dataframe-output');">See Full Dataframe in Mito</div> <script> if (window.commands?.hasCommand('create-mitosheet-from-dataframe-output')) document.getElementById('f990e928-c3dd-4e29-9574-3dbeb82ed3ee').style.display = 'flex' </script> 
@@ -261,10 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><strong>NYC Dataframe</strong></p>
 <div id="1e1e5e3f-e10d-4453-ba5c-2d871dcb6e44" class="cell" data-execution_count="4">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>nyc_bloom_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 <div><div id="fc5d0081-a409-4f2a-8776-e2e0dae54612" style="display:none; background-color:#9D6CFF; color:white; width:200px; height:30px; padding-left:5px; border-radius:4px; flex-direction:row; justify-content:space-around; align-items:center;" onmouseover="this.style.backgroundColor='#BA9BF8'" onmouseout="this.style.backgroundColor='#9D6CFF'" onclick="window.commands?.execute('create-mitosheet-from-dataframe-output');">See Full Dataframe in Mito</div> <script> if (window.commands?.hasCommand('create-mitosheet-from-dataframe-output')) document.getElementById('fc5d0081-a409-4f2a-8776-e2e0dae54612').style.display = 'flex' </script> 
@@ -336,8 +324,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The Representative Locations are selected using a KMeans clustering algorithm, which clusters all available locations based on their latitude and longitude. Once clustered, we designate the location with the most number of observations as that cluster’s Representative Location. From this, we are able to preserve the geographical diversity of the dataset in as few locations as possible.</p>
 <p>For consistency’s sake, we keep a constant k-value of <code>k=5</code>, giving us five Representative Locations for each dataset. We do this to ensure that no one-place is overrepresented in the supplemental data, as the norm would be to dynamically calculate the k-value based on the elbow-curve method.</p>
 <div id="36cb43e8-74a6-4bfa-9dde-f4381d8998f9" class="cell" data-execution_count="5">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For each file, find its representative locations</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> location <span class="kw">in</span> util.location_dict:</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    clusters, rep_locations, loc_data <span class="op">=</span> util.get_representative_locations(util.location_dict[location], location)</span>
@@ -351,7 +337,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ouput location-specific validation data</span></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(loc_data)):</span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        loc_data[i].to_csv(<span class="ss">f"</span><span class="sc">{</span>util<span class="sc">.</span>VALIDATION_FOLDER<span class="sc">}{</span>location<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p>Plotting these representative locations on the map below, we can see that they are adequately spread out across the areas of interest.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -381,8 +366,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Some locations, like Kyoto, have extensive historical records while others, like NYC, only have data going back a few years. For this reason, we decided to focus our efforts on collecting as much weather data as possible for the past 20-30 years for each location. As such, our timeframe for these data queries were either <code>1990-01-01</code> to <code>2023-12-31</code> <strong>OR</strong> <code>2000-01-01</code> to <code>2023-12-31</code>, depending on the availability of the target features.</p>
 <p>This method ensured that we would not run the risk of having less weather data than prediction data, ultimately allowing us to make the best use of the competition datasets.</p>
 <div id="8fa9d1db-b402-420c-a0bf-babccff90918" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(util.dir_paths)):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Process the raw data</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    df_dict <span class="op">=</span> util.process_weather_files(util.dir_paths[index])</span>
@@ -390,16 +373,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Output the aggregated files</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> file_name <span class="kw">in</span> df_dict:</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        df_dict[file_name].to_csv(<span class="ss">f"</span><span class="sc">{</span>util<span class="sc">.</span>OUTPUT_PATHS[index]<span class="sc">}{</span>file_name<span class="sc">}</span><span class="ss">"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p><strong>Data Aggregation</strong></p>
 <p>The weather data pulled from Visual Crossing was in daily format, so we had to aggregate the data to get it in the desired format of monthly averages. This process was straightforward and yielded the following results.</p>
 <p>It is important to note that the integers next to the variable names represent months (i.e.&nbsp;_01 is January, _02 is February, etc.).</p>
 <div id="064e587c-0e3b-4961-9949-08d4f122dbfd" class="cell" data-execution_count="7">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_dict[file_name].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 <div><div id="418d2ebc-414a-4976-931c-e57a3017e88d" style="display:none; background-color:#9D6CFF; color:white; width:200px; height:30px; padding-left:5px; border-radius:4px; flex-direction:row; justify-content:space-around; align-items:center;" onmouseover="this.style.backgroundColor='#BA9BF8'" onmouseout="this.style.backgroundColor='#9D6CFF'" onclick="window.commands?.execute('create-mitosheet-from-dataframe-output');">See Full Dataframe in Mito</div> <script> if (window.commands?.hasCommand('create-mitosheet-from-dataframe-output')) document.getElementById('418d2ebc-414a-4976-931c-e57a3017e88d').style.display = 'flex' </script> 
@@ -567,8 +546,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Outliers</strong></p>
 <p>Our tests indicated that the removal of outliers hurt our model (R2 decreased by ~0.3). As such, we opted to leave them in in favor of a more diverse training dataset.</p>
 <div id="4a405dd6-5a02-4d47-a569-702052f4ae08" class="cell" data-execution_count="8">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>combined_df <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(util.VALIDATION_PATHS)):</span>
@@ -587,15 +564,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>combined_df <span class="op">=</span> combined_df.fillna(combined_df.mean(numeric_only<span class="op">=</span><span class="va">True</span>))</span>
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>combined_df.to_csv(<span class="ss">f"</span><span class="sc">{</span>util<span class="sc">.</span>COMBINED_OUT_PATH<span class="sc">}</span><span class="ss">combined.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <p><strong>Training Dataset</strong></p>
 <p>A random sample of five observations is shown below to demonstrate the format of the training dataset. The columns <code>location</code> and <code>year</code> are purely descriptive and are omitted when training the model. <code>bloom_doy</code> is the value we are predicting.</p>
 <div id="4579dfe2-790d-4913-a094-e5656c2331ee" class="cell" data-execution_count="9">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>combined_df.sample(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 <div><div id="6367ae76-ca2a-4560-9528-cf8c30a7f7f9" style="display:none; background-color:#9D6CFF; color:white; width:200px; height:30px; padding-left:5px; border-radius:4px; flex-direction:row; justify-content:space-around; align-items:center;" onmouseover="this.style.backgroundColor='#BA9BF8'" onmouseout="this.style.backgroundColor='#9D6CFF'" onclick="window.commands?.execute('create-mitosheet-from-dataframe-output');">See Full Dataframe in Mito</div> <script> if (window.commands?.hasCommand('create-mitosheet-from-dataframe-output')) document.getElementById('6367ae76-ca2a-4560-9528-cf8c30a7f7f9').style.display = 'flex' </script> 
@@ -781,8 +754,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>After identifying the ideal hyper-parameters and features, we created an optimal version of the GBR model.</p>
 <p>This model produced the following MSE and R2 values:</p>
 <div id="4abb413e-64fe-4d3a-aa64-6a49f82cc61b" class="cell" data-execution_count="10">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load combined data</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">"./data/cleaned/combined.csv"</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -817,7 +788,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: THIS MODEL HAS ALREADY BEEN CREATED AND SAVED, SO THAT PART OF THE CODE HAS BEEN</span></span>
 <span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="co">#       LEFT OUT. IF YOU ARE INTERESTED IN SEEING THAT PORTION OF THE CODE,</span></span>
 <span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="co">#       PLEASE LOOK THROUGH "./notebooks/4-ConstructModel.ipynb".</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Mean Squared Error: 59.074074074074076
 R-squared: 0.8707358436763668</code></pre>
@@ -829,8 +799,6 @@ R-squared: 0.8707358436763668</code></pre>
 <p>Finally, our model was deployed and used to predict the <code>bloom_doy</code> for the final five locations: NYC, Washington DC, Vancouver, Kyoto, and Liestal.</p>
 <p>The final predictions (with intervals) are as follows:</p>
 <div id="1bc30a10-ee92-45f7-a446-ffcc4c427e87" class="cell" data-execution_count="11">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load new data here</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>file_path <span class="op">=</span> <span class="st">"./data/inputs/competition_input.csv"</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -856,7 +824,6 @@ R-squared: 0.8707358436763668</code></pre>
 <span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>predictions_df.to_csv(output_file_name, index<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>predictions_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <div>
 <div><div id="25b82a40-ce42-4820-ab8f-1b917c988aa0" style="display:none; background-color:#9D6CFF; color:white; width:200px; height:30px; padding-left:5px; border-radius:4px; flex-direction:row; justify-content:space-around; align-items:center;" onmouseover="this.style.backgroundColor='#BA9BF8'" onmouseout="this.style.backgroundColor='#9D6CFF'" onclick="window.commands?.execute('create-mitosheet-from-dataframe-output');">See Full Dataframe in Mito</div> <script> if (window.commands?.hasCommand('create-mitosheet-from-dataframe-output')) document.getElementById('25b82a40-ce42-4820-ab8f-1b917c988aa0').style.display = 'flex' </script> 
