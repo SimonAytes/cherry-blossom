@@ -1,3 +1,4 @@
+# Import libraries
 import pandas as pd
 import numpy as np
 import joblib
@@ -9,17 +10,12 @@ from sklearn.preprocessing import StandardScaler
 
 from sklearn.ensemble import GradientBoostingRegressor
 
-scaler = StandardScaler()
-
 # Path to the model to load
 model_dir_path = "./models/GBR-20240218-02/"
-
 # Load the trained model
 model = joblib.load(f'{model_dir_path}model.pkl')
-
 # Load the normalization parameters
 normalization_params = joblib.load(f'{model_dir_path}normalization_params.pkl')
-
 # Load the feature names
 feature_list = joblib.load(f'{model_dir_path}feature_list.pkl')
 
@@ -59,15 +55,19 @@ selected_features = ['day_length_07', 'day_length_10', 'day_length_05', 'day_len
        'day_length_01', 'solarenergy_03', 'cloudcover_09', 'dew_04',
        'humidity_09']
 
-def normalize_new_data(new_data, normalization_params):
+# Create scaler variable
+scaler = StandardScaler()
+
+
+def normalize_new_data(new_data, norm_params):
     # Ensure the input data is a numpy array
     if isinstance(new_data, np.ndarray):
         # Normalize each feature using the stored mean and standard deviation
-        normalized_data = (new_data - normalization_params['mean']) / normalization_params['std']
+        normalized_data = (new_data - norm_params['mean']) / norm_params['std']
         return normalized_data
     elif isinstance(new_data, pd.DataFrame):
         # Normalize each column (feature) using the stored mean and standard deviation
-        normalized_data = (new_data - normalization_params['mean']) / normalization_params['std']
+        normalized_data = (new_data - norm_params['mean']) / norm_params['std']
         return normalized_data
     else:
         raise ValueError("Input data must be a numpy array or pandas DataFrame")
@@ -148,20 +148,11 @@ def get_predictions(x, model):
 
 
 def compute_normalization_params(training_data):
-    """
-    Compute normalization parameters (mean and standard deviation) from training data.
-
-    Parameters:
-        training_data (numpy array or pandas DataFrame): Training data used for computing normalization parameters.
-
-    Returns:
-        dict: Dictionary containing normalization parameters (e.g., 'mean' and 'std' for each feature).
-    """
     # Compute mean and standard deviation for each feature
     mean = np.mean(training_data, axis=0)
     std = np.std(training_data, axis=0)
 
     # Store the normalization parameters in a dictionary
-    normalization_params = {'mean': mean, 'std': std}
+    norm_params = {'mean': mean, 'std': std}
 
-    return normalization_params
+    return norm_params

@@ -1,8 +1,10 @@
+# Import libraries
 import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 import os
 
+# PATHS
 CLUSTERS_FOLDER = "./data/interim/representative_locations/clusters/"
 LOCATIONS_FOLDER = "./data/interim/representative_locations/location/"
 VALIDATION_FOLDER = "./data/interim/representative_locations/validation/"
